@@ -216,7 +216,7 @@ while game_on: # Will run forever (until break)
 	 	correct_move = False
 	 	dir_text = font_time.render("Dance move: %s" % dance_moves[move], True, (0, 0, 0))
 	 	screen.blit(dir_text, [700, 700])
-		
+		print dance_moves[move]
 		while not correct_move and time_run != 0:
 			# correct_move = True
 			# dir_text = font_time.render("Dance move: %s" % dance_moves[move], True, (0, 0, 0))

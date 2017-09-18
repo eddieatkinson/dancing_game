@@ -17,6 +17,16 @@ background_color3 = (24, 200, 0)
 screen = pygame.display.set_mode(screen_size)
 pygame.display.set_caption("Level 1: Avoid Ginger!")
 
+dance_moves = ["a", "s", "d", "f"]
+keys = {
+	"a": 97,
+	"s": 115,
+	"d": 100,
+	"f": 102
+}
+
+move = randint(0, 3)
+
 player = Player('fred1.png', 100, 100, screen)
 players = Group()
 players.add(player)
@@ -40,6 +50,7 @@ count = 0
 other_count = 0
 divisor = 30
 game_on = True
+time_run = 0
 
 # clock_ticks = pygame.time.get_ticks()
 # Set up the main game loop
@@ -193,26 +204,37 @@ while game_on: # Will run forever (until break)
 		player.draw_me()
 		player.stay_still()
 
-		dance_moves = ["a", "s", "d", "f"]
-		keys = {
-			"a": 97,
-			"s": 115,
-			"d": 100,
-			"f": 102
-		}
+		# dance_moves = ["a", "s", "d", "f"]
+		# keys = {
+		# 	"a": 97,
+		# 	"s": 115,
+		# 	"d": 100,
+		# 	"f": 102
+		# }
 
-	 	move = randint(0, 3)
+	 	# move = randint(0, 3)
 	 	correct_move = False
-	 	while not correct_move:
-		 	dir_text = font_time.render("Dance move: %s" % dance_moves[move], True, (0, 0, 0))
-		 	screen.blit(dir_text, [700, 700])
+	 	dir_text = font_time.render("Dance move: %s" % dance_moves[move], True, (0, 0, 0))
+	 	screen.blit(dir_text, [700, 700])
+		
+		while not correct_move and time_run != 0:
+			# correct_move = True
+			# dir_text = font_time.render("Dance move: %s" % dance_moves[move], True, (0, 0, 0))
+	 	# 	screen.blit(dir_text, [700, 700])
 		 	for event in pygame.event.get():
-				if event.type == pygame.QUIT:
-					quit()
-					game_on = False
-			 	elif event.type == pygame.KEYDOWN:
+		 		if event.type == pygame.QUIT:
+		 			quit()
+			 	if event.type == pygame.KEYDOWN:
 			 		if event.key == keys[dance_moves[move]]:
 			 			print "Great job!"
 			 			correct_move = True
-
+			 			# player.change_image(pygame.image.load("fred2.png"), 400, 400)
+			 			# player.draw_me()
+			 		# else:
+			 		# 	correct_move = False
+			# screen.blit(dir_text, [700, 700])
+		
+		
+	 	time_run += 1
+		move = randint(0, 3)
 		pygame.display.flip()

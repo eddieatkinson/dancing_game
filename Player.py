@@ -9,10 +9,12 @@ class Player(Sprite):
 	def __init__(self, image, start_x, start_y, screen):
 		super(Player, self).__init__()
 		self.image = pygame.image.load(image)
-		self.image = pygame.transform.scale(self.image, (150, 150))
+		self.image = pygame.transform.scale(self.image, (100, 100))
 		self.x = start_x
 		self.y = start_y
 		self.speed = 10
+		self.wins = 0
+		self.rect = self.image.get_rect()
 		self.screen = screen
 		self.should_move_up = False
 		self.should_move_down = False
@@ -28,6 +30,8 @@ class Player(Sprite):
 			self.x += self.speed
 		if self.should_move_left:
 			self.x -= self.speed
+		self.rect.left = self.x
+		self.rect.top = self.y
 		self.screen.blit(self.image, [self.x, self.y])
 
 	def should_move(self, direction, yes_or_no):
@@ -39,3 +43,20 @@ class Player(Sprite):
 			self.should_move_right = yes_or_no
 		if (direction == "left"):
 			self.should_move_left = yes_or_no
+
+	def got_coins(self):
+		self.wins += 1
+
+	def change_image(self, image, width, height):
+		self.image = image
+		self.image = pygame.transform.scale(self.image, (width, height))
+		# self.x = player_x
+		# self.y = player_y
+
+	def new_position(self, new_x, new_y):
+		self.x = new_x
+		self.y = new_y
+
+	def stay_still(self):
+		self.speed = 0
+

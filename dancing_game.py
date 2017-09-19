@@ -151,7 +151,7 @@ while game_on: # Will run forever (until break)
 		pygame.display.flip()
 	if player.wins == 1:
 		clock_ticks = pygame.time.get_ticks() # To initiate the timer for the "seconds" variable below.
-	while player.wins >= 1 and seconds <= 20:
+	while player.wins >= 1 and seconds <= 3:
 		player.change_image(pygame.image.load("fred2.png"), 100, 100)
 		pygame.display.set_caption("Level 2: Rotten Tomatoes!")
 		screen.blit(background_image2, [0, 0])
@@ -218,7 +218,7 @@ while game_on: # Will run forever (until break)
 
 		pygame.display.flip()
 
-	while seconds >= 20:
+	while seconds >= 3:
 		player.change_image(pygame.image.load(level3_img[img_counter]), 400, 400)
 		player.new_position(400, 0)
 		pygame.display.set_caption("Level 3: Dance Off!")
@@ -232,6 +232,7 @@ while game_on: # Will run forever (until break)
 		print current_move
 		dir_text = font_move.render("Dance move: %s" % current_move, True, (0, 0, 0))
 	 	screen.blit(dir_text, [700, 700])
+		
 		while not correct_move and time_run != 0:
 			# correct_move = True
 			# dir_text = font_time.render("Dance move: %s" % dance_moves[move], True, (0, 0, 0))
@@ -241,10 +242,13 @@ while game_on: # Will run forever (until break)
 		 			quit()
 			 	if event.type == pygame.KEYDOWN:
 			 		if event.key == keys[dance_moves[move]]:
-			 			correct_text = font_move.render("Great job! Keep it up!", True, (255, 255, 255))
-			 			screen.blit(correct_text, [300, 500])
+			 			correct_text = font_move.render("Great job! Keep it up!", True, (255, 0, 0))
+			 			screen.blit(correct_text, [100, 100])
 			 			correct_move = True
+			 			old_img_counter = img_counter
 			 			img_counter = randint(0, 2)
+			 			if old_img_counter == img_counter:
+			 				img_counter -= 1
 			 			# level3_img = "fred2.png"
 			 			# player.change_image(pygame.image.load("fred2.png"), 400, 400)
 			 			# player.new_position(0, 0)

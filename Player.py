@@ -60,3 +60,5 @@ class Player(Sprite):
 	def stay_still(self):
 		self.speed = 0
 
+	def speed_up(self):
+		self.speed += 1

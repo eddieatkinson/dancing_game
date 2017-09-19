@@ -25,3 +25,6 @@ class Villain(Sprite):
 
 	def draw_me(self):
 		self.screen.blit(self.image, [self.x, self.y])
+
+	def speed_up(self):
+		self.speed += 1
